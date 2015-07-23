@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+
+    <style>
+        body{
+            margin: 0;
+        }
+        canvas{
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <img src="nature.jpg" alt="Nature"  height="300px" width="400px">
+    <canvas id="firstcanvas" height="300px" width="400px"></canvas>
+    <script>
+        var canvas = document.querySelector('canvas');
+        console.log(canvas.height);//150
+        console.log(canvas.style.height);//empty
+        console.log(canvas.width);//300
+
+        var context = canvas.getContext('2d');
+        var img = new Image();
+        img.src = 'nature.jpg';
+
+
+        var imgonpage = document.querySelector('img');
+
+/*        window.addEventListener('load',function(){
+
+            //context.drawImage(imgonpage,100,100);
+        });
+
+        document.addEventListener('readystatechange',function(){
+
+            if(document.readyState === 'complete'){
+                //context.drawImage(imgonpage,100,100);
+            }
+
+        });
+ */
+
+
+            img.addEventListener('load', function () {
+
+                context.drawImage(img,0,0,400,300);
+                context.font = '48px serif';
+                context.fillStyle = 'red';
+                //context.fillRect(0,0,400,300);
+                context.fillText('Hello!', 100,100,100);
+
+
+            });
+
+
+
+
+    </script>
+</body>
+</html>

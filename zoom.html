@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body{
+            margin: 0;
+            background-color: #b72633;
+        }
+    </style>
+</head>
+<body>
+    <img src="nature.jpg" alt="nature" width="400px" height="300px">
+    <canvas width="400px" height="300px"></canvas>
+
+<script>
+    var canvas = document.querySelector('canvas');
+    var context = canvas.getContext('2d');
+
+
+    window.addEventListener('load',function(){
+        var img = document.querySelector('img');
+        img.addEventListener('mousemove',function(event){
+            var position = new Position(event.clientX,event.clientY);
+            imageZoom(img,context,position);
+        })
+    })
+
+    function Position(x,y){
+        this.x = x;
+        this.y = y;
+    }
+
+    var globals = {
+        sHeight:50,
+        sWidth:50,
+        scale:2
+    };
+    function imageZoom(img,context,position){
+        var sx = position.x - globals.sWidth/2;
+        var sy = position.y - globals.sHeight/2;
+
+        context.drawImage(img,0,0,sx,sy,0,0,400,300);
+    }
+
+
+</script>
+</body>
+</html>

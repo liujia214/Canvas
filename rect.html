@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body{
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="rect"></canvas>
+    <script>
+        var canvas = document.getElementById('rect');
+        var context = canvas.getContext('2d');
+
+        context.fillStyle = 'red';
+        context.fillRect(0,0,100,100);
+        context.strokeRect(0,0,100,100);
+        var init = {x:0,y:0};
+
+        canvas.addEventListener('mousedown',function(event){
+            init.x = event.clientX;
+            init.y = event.clientY;
+            this.addEventListener('mousemove',mousemoveHandler);
+        });
+        function mousemoveHandler(event){
+            var width = event.clientX - init.x;
+            var height = event.clientY - init.y;
+            context.clearRect(0,0,500,500);
+            context.fillRect(init.x,init.y,width,height);
+        }
+        canvas.addEventListener('mouseup',function(){
+            init.x = 0;
+            init.y = 0;
+            this.removeEventListener('mousemove',mousemoveHandler);
+        });
+
+
+    </script>
+</body>
+</html>

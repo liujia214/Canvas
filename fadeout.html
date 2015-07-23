@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body{
+            margin:0;
+            padding: 0;
+        }
+        canvas{
+            border: 1px solid gray;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+        var filter = {
+            fadeout:function(array){
+                console.log(width);
+                console.log(height);
+                var maxbright = Math.min(width,height)/2;
+                console.log(maxbright);
+                for(var i = 0;i<array.length;i+=4){
+                    if(distance(i/4+1) > maxbright){
+                        array[i + 3] = 0;
+                    }else{
+                        array[i + 3] =255 - 255/maxbright * distance(i/4 + 1);
+                    }
+                }
+                function distance(i){
+                    var x = i % width;
+                    var y = i / width + 1;
+                    var distance = Math.sqrt((width/2 - x) * (width/2 - x) + (height/2 - y) * (height/2 - y));
+                    return distance;
+                }
+            }
+
+
+        };
+
+        var canvas = document.getElementById('canvas');
+        var context = canvas.getContext('2d');
+        var img = new Image();
+        img.src = 'nature.jpg';
+        var width = canvas.width = img.width;
+        var height = canvas.height = img.height;
+
+        img.onload = function(){
+            context.drawImage(img,0,0,width,height);
+            var imgdata = context.getImageData(0,0,img.width,img.height);
+            var dataarray = imgdata.data;
+            filter.fadeout(dataarray);
+            context.putImageData(imgdata,0,0);
+        }
+
+
+    </script>
+</body>
+</html>
